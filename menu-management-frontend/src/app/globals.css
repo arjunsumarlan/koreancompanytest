@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --sidebar-bg: #1A1D1F;
+  --active-menu: #83EA00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.menu-item {
+  @apply flex items-center py-2 px-4 hover:bg-gray-50 rounded-lg cursor-pointer;
+}
+
+.menu-item.active {
+  @apply bg-blue-50 text-blue-600;
+}
+
+.menu-icon {
+  @apply w-5 h-5 mr-3 text-gray-400;
+}
+
+.menu-chevron {
+  @apply w-4 h-4 ml-auto text-gray-400;
+}
+
+.menu-tree-line {
+  @apply absolute left-0 w-px h-full bg-gray-200;
+}
+
+.menu-item-hover {
+  @apply transition-colors duration-200 hover:bg-gray-50;
+}
