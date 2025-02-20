@@ -2,16 +2,18 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-COPY prisma ./prisma/
+# First copy only package files
+COPY menu-management-backend/package*.json ./
 
 # Install dependencies
 RUN npm install
+
+# Copy Prisma schema
+COPY menu-management-backend/prisma ./prisma/
 RUN npx prisma generate
 
 # Copy source code
-COPY . .
+COPY menu-management-backend/ .
 
 # Build app
 RUN npm run build
@@ -19,5 +21,5 @@ RUN npm run build
 # Expose port
 EXPOSE 3002
 
-# Start app with increased startup timeout
+# Start app
 CMD ["node", "dist/main"] 
