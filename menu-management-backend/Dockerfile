@@ -2,7 +2,7 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# First copy only package files
+# Copy package files
 COPY menu-management-backend/package*.json ./
 
 # Install dependencies
@@ -21,5 +21,5 @@ RUN npm run build
 # Expose port
 EXPOSE 3002
 
-# Start app
-CMD ["node", "dist/main"] 
+# Start app (update path to dist)
+CMD ["npm", "run", "start:prod"] 
