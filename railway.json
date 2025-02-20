@@ -3,7 +3,10 @@
   "build": {
     "builder": "DOCKERFILE",
     "dockerfilePath": "menu-management-backend/Dockerfile",
-    "root": "menu-management-backend"
+    "root": "menu-management-backend",
+    "buildArgs": {
+      "DATABASE_URL": "${DATABASE_URL}"
+    }
   },
   "deploy": {
     "startCommand": "npm run start:prod",
