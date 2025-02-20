@@ -27,6 +27,7 @@ A full-stack application for managing hierarchical menu structures with unlimite
 - TypeScript
 - Redux Toolkit (RTK Query)
 - Tailwind CSS
+- Firebase Hosting
 
 ### Backend
 - NestJS
@@ -34,102 +35,104 @@ A full-stack application for managing hierarchical menu structures with unlimite
 - Prisma ORM
 - TypeScript
 - Docker
+- Railway
 
-## Quick Start
+## Deployment
 
-### Prerequisites
+### Backend Deployment (Railway)
+
+1. Create a new project in Railway
+2. Add a PostgreSQL database
+3. Create a new service from GitHub repository
+4. Set environment variables:
+   ```
+   DATABASE_URL=your-postgresql-url
+   PORT=3002
+   ```
+5. Deploy the service
+
+### Frontend Deployment (Firebase)
+
+1. Install Firebase CLI:
+   ```bash
+   npm install -g firebase-tools
+   ```
+
+2. Login to Firebase:
+   ```bash
+   firebase login
+   ```
+
+3. Initialize Firebase in your frontend directory:
+   ```bash
+   cd menu-management-frontend
+   firebase init hosting
+   ```
+
+4. Set up environment variables:
+   ```env
+   NEXT_PUBLIC_API_URL=https://your-backend-service.railway.app
+   ```
+
+5. Build and deploy:
+   ```bash
+   npm run deploy
+   ```
+
+### Local Development
+
+#### Prerequisites
 - Node.js 18 or later
 - PostgreSQL
 - npm
 
-### Backend Setup
-
+#### Backend Setup
 1. Navigate to backend directory:
-```bash
-cd menu-management-backend
-```
+   ```bash
+   cd menu-management-backend
+   ```
 
 2. Install dependencies:
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 3. Create `.env` file:
-```env
-DATABASE_URL="postgresql://user:password@localhost:5432/menu?schema=public"
-PORT=3002
-FRONTEND_URL=http://localhost:3000
-```
+   ```env
+   DATABASE_URL="postgresql://user:password@localhost:5432/menu?schema=public"
+   PORT=3002
+   ```
 
 4. Run database migrations:
-```bash
-npx prisma migrate dev
-```
+   ```bash
+   npx prisma migrate dev
+   ```
 
 5. Start the backend server:
-```bash
-npm run start:dev
-```
+   ```bash
+   npm run start:dev
+   ```
 
-### Frontend Setup
-
+#### Frontend Setup
 1. Navigate to frontend directory:
-```bash
-cd menu-management-frontend
-```
+   ```bash
+   cd menu-management-frontend
+   ```
 
 2. Install dependencies:
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 3. Create `.env.local` file:
-```env
-NEXT_PUBLIC_API_URL=http://localhost:3002
-```
+   ```env
+   NEXT_PUBLIC_API_URL=http://localhost:3002
+   ```
 
 4. Start the frontend development server:
-```bash
-npm run dev
-```
-
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
-
-## Development
-
-### Backend Development
-- API runs on [http://localhost:3002](http://localhost:3002)
-- Swagger documentation available at [http://localhost:3002/api](http://localhost:3002/api)
-- Database schema managed with Prisma
-
-### Frontend Development
-- Development server runs on [http://localhost:3000](http://localhost:3000)
-- Real-time updates using RTK Query
-- Styled with Tailwind CSS
-
-## Docker Support
-
-Backend can be run in Docker:
-
-```bash
-cd menu-management-backend
-docker build -t menu-management-backend .
-docker run -p 3002:3002 --env-file .env menu-management-backend
-```
-
-## Testing
-
-### Backend Tests
-```bash
-cd menu-management-backend
-npm run test
-```
-
-### Frontend Tests
-```bash
-cd menu-management-frontend
-npm run test
-```
+   ```bash
+   npm run dev
+   ```
 
 ## API Endpoints
 
