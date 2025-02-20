@@ -11,18 +11,14 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
-  // CORS configuration
+  // Enable CORS for all origins
   app.enableCors({
-    origin: [
-      '*',
-      'http://localhost:3000',
-      'http://localhost:3001',
-      'https://my-first-project-ecfed.web.app',
-      'https://my-first-project-ecfed.firebaseapp.com',
-    ],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
+    origin: '*', // Allow all origins
+    methods: '*', // Allow all methods
+    allowedHeaders: '*', // Allow all headers
+    exposedHeaders: '*', // Expose all headers
+    credentials: false, // Must be false when using '*'
+    maxAge: 86400, // Cache preflight requests for 24 hours
   });
 
   // Enable validation pipes
