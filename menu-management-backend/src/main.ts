@@ -27,9 +27,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  // Set port explicitly
   const port = process.env.PORT || 3002;
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
+
   console.log(`Application is running on: http://localhost:${port}`);
+  console.log(`Health check available at: http://localhost:${port}/health`);
 }
 bootstrap();
