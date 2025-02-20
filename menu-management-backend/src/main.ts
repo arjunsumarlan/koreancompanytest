@@ -11,10 +11,17 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
-  // Enable CORS for all origins during deployment
+  // CORS configuration
   app.enableCors({
-    origin: true,
+    origin: [
+      '*',
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'https://my-first-project-ecfed.web.app',
+      'https://my-first-project-ecfed.firebaseapp.com',
+    ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   });
 
