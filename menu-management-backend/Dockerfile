@@ -2,16 +2,18 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-COPY prisma ./prisma/
+# First copy only package files to leverage Docker cache
+COPY menu-management-backend/package*.json ./
 
 # Install dependencies
 RUN npm install
+
+# Copy Prisma files and generate client
+COPY menu-management-backend/prisma ./prisma/
 RUN npx prisma generate
 
-# Copy app source
-COPY . .
+# Copy the rest of the application
+COPY menu-management-backend/ .
 
 # Build app
 RUN npm run build
