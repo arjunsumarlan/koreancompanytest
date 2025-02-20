@@ -1,11 +1,18 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Menu } from '@/types/menu';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+// Ensure HTTPS is used
+const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace('http://', 'https://') || 'http://localhost:3002';
 
 export const menuApi = createApi({
   reducerPath: 'menuApi',
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: API_URL,
+    credentials: 'omit',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }),
   tagTypes: ['Menu'],
   endpoints: (builder) => ({
     getMenus: builder.query<Menu[], void>({
